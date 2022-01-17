@@ -1,7 +1,11 @@
 const exp = require("constants");
 const express = require("express");
 const https = require("https");
+const dotenv = require("dotenv");
+dotenv.config()
+
 const app = express();
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
@@ -29,13 +33,15 @@ app.post("/", function (req, res) {
     ]
   };
   const jsonData = JSON.stringify(data);
-  const url = "https://us20.api.mailchimp.com/3.0/lists/7176328d33"
+  const apiKey = process.env.API_KEY;
+  const url = "https://us20.api.mailchimp.com/3.0/lists/7176328d33";
   const options = {
-    method: "post",
-    auth: "shubham:e2a49754b7bb3b1f6d0e80910425547e-us20"
+    method: "POST",
+    auth: apiKey,
   }
 
   const request = https.request(url, options, function (response) {
+    console.log(response.statusCode)
     if (response.statusCode == 200) {
       res.sendFile(__dirname + "/success.html");
     } else {
