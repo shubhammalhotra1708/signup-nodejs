@@ -29,8 +29,9 @@ app.post("/", function (req, res) {
     ]
   };
   const jsonData = JSON.stringify(data);
-  const apiKey = process.env.apiKey;
-  const listKey = process.env.listKey;
+  const apiKey = process.env.API_KEY;
+  console.log(apiKey)
+  const listKey = process.env.LIST_KEY;
   const url = "https://us20.api.mailchimp.com/3.0/lists/" + listKey;
   const options = {
     method: "post",
