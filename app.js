@@ -15,9 +15,6 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/signup.html")
 })
 
-const key = process.env.API_KEY
-console.log(key);
-
 app.post("/", function (req, res) {
   const firstName = req.body.fname;
   const lastName = req.body.lname;
@@ -37,15 +34,14 @@ app.post("/", function (req, res) {
   };
   const jsonData = JSON.stringify(data);
   const apiKey = process.env.API_KEY;
-  console.log(JSON.stringify(apiKey));
-  const listKey = process.env.LIST_KEY;
-  const url = "https://us20.api.mailchimp.com/3.0/lists/" + listKey;
+  const url = "https://us20.api.mailchimp.com/3.0/lists/7176328d33";
   const options = {
-    method: "post",
+    method: "POST",
     auth: apiKey,
   }
 
   const request = https.request(url, options, function (response) {
+    console.log(response.statusCode)
     if (response.statusCode == 200) {
       res.sendFile(__dirname + "/success.html");
     } else {
