@@ -1,2 +1,5 @@
 .env
+<<<<<<< HEAD
 node_modules
+=======
+>>>>>>> 200c43d... added gitignore
