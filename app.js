@@ -1,7 +1,11 @@
 const exp = require("constants");
 const express = require("express");
 const https = require("https");
+const dotenv = require("dotenv");
+dotenv.config()
+
 const app = express();
+
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
@@ -10,6 +14,9 @@ app.use(express.static("public"));
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/signup.html")
 })
+
+const key = process.env.API_KEY
+console.log(key);
 
 app.post("/", function (req, res) {
   const firstName = req.body.fname;
@@ -30,7 +37,7 @@ app.post("/", function (req, res) {
   };
   const jsonData = JSON.stringify(data);
   const apiKey = process.env.API_KEY;
-  console.log(apiKey)
+  console.log(JSON.stringify(apiKey));
   const listKey = process.env.LIST_KEY;
   const url = "https://us20.api.mailchimp.com/3.0/lists/" + listKey;
   const options = {
