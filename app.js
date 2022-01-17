@@ -29,10 +29,12 @@ app.post("/", function (req, res) {
     ]
   };
   const jsonData = JSON.stringify(data);
-  const url = "https://us20.api.mailchimp.com/3.0/lists/7176328d33"
+  const apiKey = process.env.apiKey;
+  const listKey = process.env.listKey;
+  const url = "https://us20.api.mailchimp.com/3.0/lists/" + listKey;
   const options = {
     method: "post",
-    auth: "shubham:e2a49754b7bb3b1f6d0e80910425547e-us20"
+    auth: apiKey,
   }
 
   const request = https.request(url, options, function (response) {
